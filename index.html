@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Хлебомолы</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="preload" href="fonts/Philosopher-Bold.woff" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/Philosopher-Bold.woff2" as="font" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.min.css">
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=48899678-efd3-4d04-8fc5-f983050ddd12&lang=ru_RU" type="text/javascript">
+  </script>
+</head>
+<body>
+<header class="header" id="header">
+  <a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">×</a>
+  <div class="top" id="top">
+    <ul class="about">
+      <li class="about__item">
+        <a class="about__link about__link--shop" href="#">
+          О магазине
+        </a>
+      </li>
+      <li class="about__item">
+        <a class="about__link about__link--delivery" href="#">
+          Доставка и самовывоз
+        </a>
+      </li>
+      <li class="about__item">
+        <a class="about__link about__link--pay" href="#">
+          Оплата
+        </a>
+      </li>
+      <li class="about__item">
+        <a class="about__link about__link--contacts" href="#">
+          Контакты
+        </a>
+      </li>
+      <li class="about__item">
+        <a class="about__link about__link--blog" href="#">
+          Блог
+        </a>
+      </li>
+    </ul>
+    <div class="top__wrapper">
+      <address class="top__address">Город: <button class="top__city" type="button">Москва</button></address>
+      <a class="top__account" href="#">Личный кабинет</a>
+    </div>
+  </div>
+  <div class="middle">
+    <div class="middle__box">
+      <div class="logo">
+        <img class="logo__img" src="img/logo-text.png" width="189" height="26" alt="Логотип Хлебомолы">
+        <p class="logo__description">
+          Технологии правильного питания
+        </p>
+      </div>
+    </div>
+    <div class="middle__wrapper">
+      <input class="middle__search" type="search" placeholder="Найти что-нибудь">
+      <div class="phone">
+        <p class="phone__number">+7 800 555-33-86</p>
+        <button class="phone__back" type="button">Обратный звонок</button>
+      </div>
+    </div>
+  </div>
+  <div class="bottom" id="bottom">
+    <ul class="technics">
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Мельницы
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Техника
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Для выпечки
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Посуда
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Проращиватели
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Детям
+        </a>
+      </li>
+      <li class="technics__item">
+        <a class="technics__link" href="#">
+          Чай из Непала
+        </a>
+      </li>
+    </ul>
+    <div class="sum" id="sum-header">
+      13 990 ₽
+    </div>
+  </div>
+</header>
+<main class="main" id="main">
+  <div class="main__container">
+    <button class="openbtn" id="openbtn" type="button" href="javascript:void(0)" onclick="openNav()">
+      ☰
+    </button>
+    <section class="order">
+      <h3 class="order__header">Ваш заказ</h3>
+      <table class="order__table">
+        <tr class="order__row">
+          <td class="order__name">
+            Мельница ручная Kornkraft&nbspMia&nbspaMola<span class="order__amount"></span>
+          </td>
+          <td class="order__price"><span class="order__cost">18990</span> ₽</td>
+        </tr>
+        <tr class="order__row">
+          <td class="order__name">
+            Пшеница БИО, 1 кг (Россия) (<span class="order__amount">2</span> шт)
+          </td>
+          <td class="order__price"><span class="order__cost">420</span> ₽</td>
+        </tr>
+        <tbody class="order__discount">
+        <tr class="order__row">
+          <td class="order__name">
+            Размер скидки (5%)
+          </td>
+          <td class="order__price">
+            <span id="order-discount">420</span> ₽
+          </td>
+        </tr>
+        <tr class="order__row">
+          <td class="order__name">
+            Итого
+          </td>
+          <td class="order__price">
+            <span id="order-sum">18344</span> ₽
+          </td>
+        </tr>
+        <tr class="order__row">
+          <td class="order__name order__name--delivery" id="order-name">
+            Самовывоз
+          </td>
+          <td class="order__price">
+            <span id="order-delivery-price">180</span> ₽
+          </td>
+        </tr>
+        </tbody>
+        <tbody class="order__sum">
+        <tr class="order__row">
+          <td class="order__calculated">
+            Сумма с доставкой
+          </td>
+          <td class="order__total">
+            <span id="order-total">18734</span> ₽
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="formalization">
+      <h1 class="formalization__header">Оформление заказа</h1>
+      <div class="tab">
+        <button class="tab__button tab__individual" onclick="openStatus(event, 'individual')" id="defaultOpen">Физическое лицо</button>
+        <button class="tab__button tab__entity" onclick="openStatus(event, 'entity')">Юридическое лицо</button>
+      </div>
+      <form action="#" method="post" name="contactForm">
+        <div class="formalization__content formalization__individual" id="individual">
+          <div class="contacts">
+            <h2 class="contacts__title">Контактные данные</h2>
+            <ul class="contacts__list">
+              <li class="contacts__item">
+                <label class="contacts__label" for="id-firstName">Имя</label>
+                <input class="contacts__name contacts__input" id="id-firstName" placeholder="Александр" name="firstName" onblur="validateName(this)">
+                <p class="contacts__error" id="contact-error-text-firstName"></p>
+              </li>
+              <li class="contacts__item">
+                <label class="contacts__label" for="surname">Фамилия</label>
+                <input class="contacts__surname contacts__input" id="surname" placeholder="Пушкин" name="lastName" onblur="validateName(this)">
+                <p class="contacts__error" id="contact-error-text-lastName"></p>
+              </li>
+              <li class="contacts__item">
+                <label class="contacts__label" for="email">Эл.почта</label>
+                <input class="contacts__email contacts__input" id="email" placeholder="mail@mail.com">
+              </li>
+              <li class="contacts__item">
+                <label class="contacts__label" for="phone">Номер телефона</label>
+                <div class="contacts__wrapper">
+                  <input class="contacts__code contacts__input" id="phone-code" value="+7">
+                  <input class="contacts__phone contacts__input" id="phone" placeholder="999 432 34-21">
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="address">
+            <h2 class="address__title">Адрес и способ доставки</h2>
+            <ul class="address__list">
+              <li class="address__item">
+                <label class="address__label" for="country">Страна</label>
+                <select class="address__country" type="" id="country">
+                  <option value="Russia">Россия</option>
+                  <option value="Germany">Никарагуа</option>
+                </select>
+              </li>
+              <li>
+                <label class="address__label" for="city">Город</label>
+                <input class="address__city" id="city">
+              </li>
+            </ul>
+          </div>
+          <div class="delivery">
+            <h3 class="delivery__title">
+              Способ доставки
+            </h3>
+            <ul class="delivery__options">
+              <li class="delivery__item">
+                <input class="delivery__radio" type="radio" name="delivery-option" id="radio-courier" value="courier" onclick="getDeliveryPrice('delivery-courier-price');show();getDelivery('delivery-courier');getTotal('delivery-courier-price')">
+                <label class="delivery__label delivery__label--courier" for="radio-courier">
+                  <span class="delivery__text" id="delivery-courier">
+                    Доставка курьерской службой
+                  </span>
+                  — <span id="delivery-courier-price">710</span> ₽
+                    <span class="delivery__notice">
+                    (Срок доставки — 1–3 дня)
+                  </span>
+                </label>
+              </li>
+              <li class="delivery__item">
+                <input class="delivery__radio" type="radio" name="delivery-option" id="radio-transport" value="transport" onclick="getDeliveryPrice('delivery-transport-price');show();getDelivery('delivery-transport');getTotal('delivery-transport-price')">
+                <label class="delivery__label" for="radio-transport">
+                  <span class="delivery__text" id="delivery-transport">
+                    Доставка транспортной компанией
+                  </span>
+                    — <span id="delivery-transport-price">210</span> ₽
+                    <span class="delivery__notice delivery__prepayment">
+                    (Данный вид доставки возможен при полной
+                    предоплате заказа. Срок доставки — 3–5 дней)
+                  </span>
+                </label>
+              </li>
+              <li class="delivery__item">
+                <input class="delivery__radio" type="radio" name="delivery-option" id="radio-pickup" value="pickup" checked="" onclick="getDeliveryPrice('delivery-pickup-price');notShow();getDelivery('delivery-pickup');getTotal('delivery-pickup-price')">
+                <label class="delivery__label delivery__label--pickup" for="radio-pickup">
+                  <span class="delivery__text" id="delivery-pickup">
+                    Самовывоз
+                  </span> — <span id="delivery-pickup-price">180</span> ₽
+                    <span class="delivery__notice">
+                    Доставка до пункта самовывоза займет 2–3 дня
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div class="point" id="pickup-block">
+            <h3 class="point__title">
+              Пункт самовывоза
+            </h3>
+            <label class="point__label" for="point">
+              Станция метро
+            </label>
+            <select class="point__select" id="point" onchange="showDiv(this)">
+              <option class="point__option" value="0" selected="">Кузнецкий мост</option>
+              <option class="point__option" value="1">Калужская</option>
+            </select>
+            <div class="point__map" id="map"></div>
+            <div class="point__address point__default" id="hidden_div0">Ул. Кузнецкий мост, 9/10 стр.2, офис 204 Ежедневно&nbspс&nbsp12:00&nbspдо&nbsp22:00
+            </div>
+            <div class="point__address" id="hidden_div1">ул. Бутлерова д.17 корп.Б, офисный центр FRESH, лофт-офис 23</div>
+          </div>
+          <div class="comment">
+            <h3 class="comment__header">Комментарий к заказу*</h3>
+            <textarea class="comment__textarea" id="id-textarea" rows="5" cols="38" oninput="sanitizeHTML(this);"></textarea>
+            <p class="comment__error">* - поле «Комментарий к заказу» не должно содержать HTML-разметки и JS-кода</p>
+          </div>
+        </div>
+        <div class="formalization__content formalization__entity" id="entity">
+          <h3>Paris</h3>
+          <p>Paris is the capital of France.</p>
+        </div>
+        <a type="submit" class="main__button">К выбору способа оплаты</a>
+      </form>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer__container">
+    <section class="footer__top">
+      <div class="footer__block footer__catalog">
+        <h4 class="footer__header">Каталог</h4>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a class="footer__link footer--mill" href="#">Мельницы</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--cultivators" href="#">Проращиватели</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--technics" href="#">Техника</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--children" href="#">Детям</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--baking" href="#">Для выпечки</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--tea" href="#">Чай из Непала</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer--dishes" href="#">Посуда</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__block footer__info">
+        <h4 class="footer__header">Информация</h4>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a class="footer__link footer__label--delivery" href="#">Доставка и самовывоз</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer__label--shop" href="#">О магазине</a>
+            </li>
+          <li class="footer__item">
+            <a class="footer__link footer__label--buy" href="#">10 причин покупать у нас</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer__label--pay" href="#">Оплата</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer__label--master" href="#">Мастер-классы</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer__label--blog" href="#">Блог</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__block">
+        <h4 class="footer__header">Контакты</h4>
+        <ul class="footer__list">
+          <li class="footer__item">
+            +7 (495) 789 41 43 — Москва
+            </li>
+          <li class="footer__item">
+            +7 (812) 385 55 86 — Санкт-Петербург
+          </li>
+          <li class="footer__item">
+            +7 (800) 555 33 86 — вся Россия
+            </li>
+          <li class="footer__item">
+            <a class="footer__link footer__link--callback" href="#">Обратная связь</a>
+          </li>
+          <li class="footer__item">
+            <a class="footer__link footer__link--email" href="#">info@hlebomoli.ru</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__block">
+        <h4 class="footer__header">Вступайте в клуб</h4>
+        <p class="footer__paragraph">
+          Подпишитесь на наши новости и будьте
+          в курсе всех акций, скидок и новых
+          поступлений, а также самых изысканных
+          рецептов.
+        </p>
+        <input class="footer__input" placeholder="Ваша эл. почта">
+      </div>
+    </section>
+    <section class="footer__bottom">
+      <p class="footer__trademark">Хлебомолы © 2014–2015</p>
+      <ul class="footer__socials">
+        <li class="footer__social">
+          <a class="footer__network" href="#">
+            <img class="footer__img" width="27" height="27" src="img/vk.png" alt="Хлебомолы в контакте">
+          </a>
+        </li>
+        <li class="footer__social">
+          <a class="footer__network" href="#">
+            <img class="footer__img" width="27" height="27" src="img/fb.png" alt="Хлебомолы в фейсбуке">
+          </a>
+        </li>
+        <li class="footer__social">
+          <a class="footer__network" href="#">
+            <img class="footer__img" width="27" height="27" src="img/insta.png" alt="Хлебомолы в инстаграмме">
+          </a>
+        </li>
+        <li class="footer__social">
+          <a class="footer__network" href="#">
+            <img class="footer__img" width="27" height="27" src="img/youtube.png" alt="Хлебомолы в соцсети">
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</footer>
+
+<script src="js/script.js">
+</script>
+
+</body>
+</html>
